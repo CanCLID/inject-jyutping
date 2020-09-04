@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "粵拼を注入"
+    },
+    "extensionDescription": {
+        "message": "漢字に広東語の発音（粵拼）を付ける。"
+    },
+    "contextMenuItemDoInjectJyutping": {
+        "message": "粵拼を注入"
+    }
+}

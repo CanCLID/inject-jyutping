@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "注入粵拼"
+    },
+    "extensionDescription": {
+        "message": "為漢字標註粵語發音（粵拼）。"
+    },
+    "contextMenuItemDoInjectJyutping": {
+        "message": "注入粵拼"
+    }
+}

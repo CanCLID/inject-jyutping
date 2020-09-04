@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "Inject Jyutping"
+    },
+    "extensionDescription": {
+        "message": "Add Cantonese pronunciation (Jyutping) on Chinese characters."
+    },
+    "contextMenuItemDoInjectJyutping": {
+        "message": "Inject Jyutping"
+    }
+}

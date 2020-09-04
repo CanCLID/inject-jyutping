@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "version": "0.0.1rc1",
+    "description": "__MSG_extensionDescription__",
+    "icons": {
+        "96": "icons/96.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content_scripts/index.js"],
+            "css": ["content_scripts/index.css"],
+            "all_frames": true,
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "scripts": ["background_scripts/index.js"],
+        "persistent": true
+    },
+    "permissions": ["contextMenus"],
+    "default_locale": "en"
+}
