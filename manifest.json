@@ -9,14 +9,14 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["content_scripts/index.js"],
-            "css": ["content_scripts/index.css"],
+            "js": ["lib/MessageManager.js", "content_scripts/index.js"],
+            "css": ["content_scripts/main.css"],
             "all_frames": true,
             "run_at": "document_end"
         }
     ],
     "background": {
-        "scripts": ["background_scripts/index.js"],
+        "scripts": ["lib/MessageManager.js", "lib/Trie.js", "background_scripts/index.js"],
         "persistent": true
     },
     "permissions": ["contextMenus"],

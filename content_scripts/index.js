@@ -32,27 +32,29 @@ function makeRuby(ch, pronunciation) {
     const ruby = document.createElement('ruby');
     ruby.classList.add('inject-jyutping');
     ruby.innerText = ch;
+
     const rp_left = document.createElement('rp');
     rp_left.appendChild(document.createTextNode('('));
     ruby.appendChild(rp_left);
+
     const rt = document.createElement('rt');
     rt.lang = 'yue-Latn';
     rt.innerText = pronunciation;
     ruby.appendChild(rt);
+
     const rp_right = document.createElement('rp');
     rp_right.appendChild(document.createTextNode(')'));
     ruby.appendChild(rp_right);
+
     return ruby;
 }
 
+const port = browser.runtime.connect();
+const mm = new MessageManager(port);
+
 async function recursiveConvert(currentNode, langMatched) {
-    // ignore certain HTML elements
-    if (   currentNode.tagName === 'RUBY'
-        || currentNode.tagName === 'OPTION'
-        || currentNode.tagName === 'NOSCRIPT'
-        || currentNode.tagName === 'SCRIPT'
-        || currentNode.tagName === 'STYLE'
-    ) {
+    // Ignore certain HTML elements
+    if (['RUBY', 'OPTION', 'TEXTAREA', 'SCRIPT', 'STYLE'].includes(currentNode.tagName)) {
         return;
     }
 
@@ -60,52 +62,39 @@ async function recursiveConvert(currentNode, langMatched) {
         langMatched = isTargetLang(currentNode.lang);
     }
 
-    const ret = [];
+    const substitutionArray = [];
 
     for (const node of currentNode.childNodes) {
-        if (node.nodeType == Node.TEXT_NODE) {
-            if (!langMatched) {
-                break;
+        if (node.nodeType === Node.TEXT_NODE) {
+            if (!langMatched || !hasHanChar(node.nodeValue)) {
+                continue;
             }
 
-            const s = node.nodeValue;
-
-            if (hasHanChar(s)) {
-                const nodesFragment = document.createDocumentFragment();
-                for (const [k, v] of await convert__(s)) {
-                    if (v === null) {
-                        nodesFragment.appendChild(document.createTextNode(k));
-                    } else {
-                        nodesFragment.appendChild(makeRuby(k, v));
-                    }
-                }
-                ret.push([nodesFragment, node]);
+            const newNodes = document.createDocumentFragment();
+            const conversionResults = await mm.sendMessage('convert', node.nodeValue);  // From background script
+            for (const [k, v] of conversionResults) {
+                newNodes.appendChild(v === null ? document.createTextNode(k) : makeRuby(k, v));
             }
+            substitutionArray.push([newNodes, node]);
         } else {
             await recursiveConvert(node, langMatched);
         }
     }
 
-    for (const [nodesFragment, node] of ret) {
-        currentNode.replaceChild(nodesFragment, node);
+    for (const [newNodes, node] of substitutionArray) {
+        currentNode.replaceChild(newNodes, node);
     }
 }
 
-async function convert_() {
-    const root = document.documentElement;
-    await recursiveConvert(document.body, isTargetLang(document.body.lang || root.lang));
+async function startConvert() {
+    const lang = document.body.lang || document.documentElement.lang || 'en';
+    await recursiveConvert(document.body, isTargetLang(lang));
 }
 
-// ================
-
-async function convert__(s) {
-    return await browser.runtime.sendMessage(s);
-}
-
-(async () => await convert_())();
-
-browser.runtime.onMessage.addListener(message => {
-    if (message.type === 'init') {
-        convert_();
+browser.runtime.onMessage.addListener(msg => {
+    if (msg.name === 'do-inject-jyutping') {
+        startConvert();
     }
 });
+
+startConvert();
