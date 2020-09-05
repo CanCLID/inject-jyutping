@@ -2,4 +2,5 @@
 /jyut6ping3.simple.dict.yaml
 /background_scripts/dictionary.json.txt
 /preprocess.py
-/icons/icon.xcf
+/lib/browser-polyfill.js
+/inject-jyutping.zip

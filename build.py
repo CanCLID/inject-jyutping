@@ -2,6 +2,9 @@ import json
 from opencc import OpenCC
 import os
 
+# Library
+os.system('wget -nc -O lib/browser-polyfill.js https://unpkg.com/webextension-polyfill@0.6.0/dist/browser-polyfill.js')
+
 # Preprocess
 os.system('wget -nc https://github.com/CanCLID/ToJyutping/raw/master/preprocess.py')
 os.system("sed -i 's/src\/ToJyutping\/jyut6ping3.simple.dict.yaml/jyut6ping3.simple.dict.yaml/' preprocess.py")
