@@ -86,15 +86,21 @@ async function recursiveConvert(currentNode, langMatched) {
     }
 }
 
-async function startConvert() {
+async function init() {
     const lang = document.body.lang || document.documentElement.lang || 'en';
     await recursiveConvert(document.body, isTargetLang(lang));
 }
 
 browser.runtime.onMessage.addListener(msg => {
     if (msg.name === 'do-inject-jyutping') {
-        startConvert();
+        init();
     }
 });
 
-startConvert();
+async function autoInit() {
+    if ((await browser.storage.local.get('enabled'))['enabled'] !== false) {
+        init();
+    }
+}
+
+autoInit();

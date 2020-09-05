@@ -1,4 +1,7 @@
 {
+    "langCode": {
+        "message": "zh-CN"
+    },
     "extensionName": {
         "message": "注入粤拼"
     },
@@ -7,5 +10,8 @@
     },
     "contextMenuItemDoInjectJyutping": {
         "message": "注入粤拼"
+    },
+    "popupCheckboxText": {
+        "message": "自动注入"
     }
 }

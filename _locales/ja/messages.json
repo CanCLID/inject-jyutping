@@ -1,4 +1,7 @@
 {
+    "langCode": {
+        "message": "ja"
+    },
     "extensionName": {
         "message": "粵拼を注入"
     },
@@ -7,5 +10,8 @@
     },
     "contextMenuItemDoInjectJyutping": {
         "message": "粵拼を注入"
+    },
+    "popupCheckboxText": {
+        "message": "オート注入"
     }
 }

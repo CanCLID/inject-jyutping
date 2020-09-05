@@ -1,4 +1,7 @@
 {
+    "langCode": {
+        "message": "en"
+    },
     "extensionName": {
         "message": "Inject Jyutping"
     },
@@ -7,5 +10,8 @@
     },
     "contextMenuItemDoInjectJyutping": {
         "message": "Inject Jyutping"
+    },
+    "popupCheckboxText": {
+        "message": "Inject automatically"
     }
 }
