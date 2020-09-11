@@ -1,10 +1,12 @@
 {
     "manifest_version": 2,
     "name": "__MSG_extensionName__",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "__MSG_extensionDescription__",
     "icons": {
-        "96": "icons/96.png"
+        "48": "icons/48.png",
+        "96": "icons/96.png",
+        "128": "icons/128.png"
     },
     "content_scripts": [
         {
