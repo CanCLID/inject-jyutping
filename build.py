@@ -5,7 +5,7 @@ import os
 os.system('wget -nc -O lib/browser-polyfill.js https://unpkg.com/webextension-polyfill@0.6.0/dist/browser-polyfill.js')
 
 # Preprocess
-os.system('wget -nc https://github.com/CanCLID/ToJyutping/raw/54945d4cf1fc86858acff7b1dd6f3f13dc838bf0/preprocess.py')
+os.system('wget -nc https://raw.githubusercontent.com/CanCLID/ToJyutping/fd472d373a9eecefd478cfc5a14939db8cbc1f7d/preprocess.py')
 os.system("sed -i 's/src\/ToJyutping\/jyut6ping3.simple.dict.yaml/jyut6ping3.simple.dict.yaml/' preprocess.py")
 os.system('python preprocess.py')
 
