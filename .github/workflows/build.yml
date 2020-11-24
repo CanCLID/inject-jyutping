@@ -2,14 +2,9 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   release:
     types:
-      - published
+      - created
 
 jobs:
   build:
@@ -25,10 +20,15 @@ jobs:
         python -m pip install opencc
     - name: Build
       run: python build.py
-    - name: Package
-      run: ./package.sh
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: inject-jyutping.zip
-        path: inject-jyutping.zip
+        name: inject-jyutping
+        path: |
+          _locales
+          background_scripts
+          content_scripts
+          icons
+          lib
+          popup
+          manifest.json

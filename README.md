@@ -15,15 +15,7 @@ This project is inspired by [EYHN/Furigana](https://github.com/EYHN/Furigana).
 
 <h2>Build <ruby>編<rt>pin1</rt></ruby> <ruby>譯<rt>jik6</rt></ruby> </h2>
 
-```sh
-python build.py
-```
-
-<h2>Package <ruby>打<rt>daa2</rt></ruby> <ruby>包<rt>baau1</rt></ruby> </h2>
-
-```sh
-./package.sh
-```
+See [`.github/workflows/build.yml`](.github/workflows/build.yml).
 
 <h2>Screenshot <ruby>截<rt>zit6</rt></ruby> <ruby>圖<rt>tou4</rt></ruby> </h2>
 
