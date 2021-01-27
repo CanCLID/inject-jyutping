@@ -2,7 +2,7 @@
 (async () => {
     document.documentElement.lang = browser.i18n.getMessage('langCode');
     document.getElementById('checkboxText').innerHTML = browser.i18n.getMessage('popupCheckboxText');
-    document.getElementById('extensionEnabled').checked = ((await browser.storage.local.get('enabled'))['enabled'] !== false) ? true : false;
+    document.getElementById('extensionEnabled').checked = (await browser.storage.local.get('enabled'))['enabled'] !== false;
 })();
 
 /* Handle state change */
