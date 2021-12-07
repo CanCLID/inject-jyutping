@@ -49,45 +49,63 @@ function makeRuby(ch, pronunciation) {
 
 const port = browser.runtime.connect();
 const mm = new MessageManager(port);
-
-async function recursiveConvert(currentNode, langMatched) {
-    // Ignore certain HTML elements
-    if (['RUBY', 'OPTION', 'TEXTAREA', 'SCRIPT', 'STYLE'].includes(currentNode.tagName)) {
-        return;
-    }
-
-    if (currentNode.lang && currentNode.lang.length) {
-        langMatched = isTargetLang(currentNode.lang);
-    }
-
-    const substitutionArray = [];
-
-    for (const node of currentNode.childNodes) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            if (!langMatched || !hasHanChar(node.nodeValue)) {
-                continue;
-            }
-
-            const newNodes = document.createDocumentFragment();
-            const conversionResults = await mm.sendMessage('convert', node.nodeValue); // From background script
-            for (const [k, v] of conversionResults) {
-                newNodes.appendChild(v === null ? document.createTextNode(k) : makeRuby(k, v));
-            }
-            substitutionArray.push([newNodes, node]);
-        } else {
-            await recursiveConvert(node, langMatched);
+const mo = new MutationObserver(changes => {
+    for (const change of changes) {
+        for (const node of change.addedNodes) {
+            const element = node.nodeType === Node.ELEMENT_NODE ? node : node.parentNode;
+            forEachText(node, convertText, element?.closest('[lang]')?.lang);
         }
     }
+});
 
-    for (const [newNodes, node] of substitutionArray) {
-        currentNode.replaceChild(newNodes, node);
+function forEachText(node, callback, lang = '') {
+    if (!isTargetLang(lang)) {
+        return;
+    }
+    if (node.nodeType === Node.TEXT_NODE) {
+        if (hasHanChar(node.nodeValue)) {
+            callback(node);
+        }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // Ignore certain HTML elements
+        if (['RUBY', 'OPTION', 'TEXTAREA', 'SCRIPT', 'STYLE'].includes(node.nodeName)) {
+            return;
+        }
+        for (const child of node.childNodes) {
+            forEachText(child, callback, node.lang);
+        }
     }
 }
 
-async function init() {
-    const lang = document.body.lang || document.documentElement.lang || 'en';
-    await recursiveConvert(document.body, isTargetLang(lang));
+async function convertText(node) {
+    const conversionResults = await mm.sendMessage('convert', node.nodeValue);
+    const newNodes = document.createDocumentFragment();
+    for (const [k, v] of conversionResults) {
+        newNodes.appendChild(v === null ? document.createTextNode(k) : makeRuby(k, v));
+    }
+    if (node.isConnected && node.nodeValue !== newNodes.textContent) {
+        node.parentNode.replaceChild(newNodes, node);
+    }
 }
+
+function once(fn) {
+    let called = false;
+    return () => {
+        if (called) return;
+        called = true;
+        fn();
+    };
+}
+
+const init = once(() => {
+    forEachText(document.body, convertText, document.body.lang || document.documentElement.lang);
+    // Listen for new added nodes, or content changes of nodes
+    mo.observe(document.body, {
+        characterData: true,
+        childList: true,
+        subtree: true,
+    });
+});
 
 browser.runtime.onMessage.addListener(msg => {
     if (msg.name === 'do-inject-jyutping') {
