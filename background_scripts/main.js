@@ -12,9 +12,9 @@ function convert(t, s) {
             const [cs, rs] = prefix;
             const zipped_cs_rs = cs.map((c, i) => [c, rs[i]]);
             res.push(...zipped_cs_rs);
-            s = s.slice(cs.reduce((acc, x) => acc + x.length, 0));  // total length of strings in array cs
+            s = s.slice(cs.reduce((acc, x) => acc + x.length, 0)); // total length of strings in array cs
         } else {
-            const k = s[Symbol.iterator]().next().value;  // Unicode-aware version of s[0]
+            const k = s[Symbol.iterator]().next().value; // Unicode-aware version of s[0]
             res.push([k, null]);
             s = s.slice(k.length);
         }
@@ -22,35 +22,33 @@ function convert(t, s) {
     return res;
 }
 
-/* Dictionary */
+(async () => {
+    /* Dictionary */
 
-const t = new Trie();
+    const t = new Trie();
 
-fetch(browser.runtime.getURL('background_scripts/dictionary.json.txt'))
-.then(r => r.json())
-.then(d => {
-    for (const [k, v] of d) {
+    for (const [k, v] of await (await fetch(browser.runtime.getURL('background_scripts/dictionary.json.txt'))).json()) {
         t.addWord(k, v);
     }
-});
 
-/* Communicate with content script */
+    /* Communicate with content script */
 
-browser.runtime.onConnect.addListener(port => {
-    const mm = new MessageManager(port);
-    mm.registerHandler('convert', s => convert(t, s));
-});
+    browser.runtime.onConnect.addListener(port => {
+        const mm = new MessageManager(port);
+        mm.registerHandler('convert', s => convert(t, s));
+    });
 
-/* Context Menu */
+    /* Context Menu */
 
-browser.contextMenus.onClicked.addListener(function(info, tab) {
-    if (info.menuItemId === 'do-inject-jyutping') {
-        browser.tabs.sendMessage(tab.id, {name: 'do-inject-jyutping'});
-    }
-});
+    browser.contextMenus.onClicked.addListener((info, tab) => {
+        if (info.menuItemId === 'do-inject-jyutping') {
+            browser.tabs.sendMessage(tab.id, { name: 'do-inject-jyutping' });
+        }
+    });
 
-browser.contextMenus.create({
-    id: 'do-inject-jyutping',
-    title: browser.i18n.getMessage('contextMenuItemDoInjectJyutping'),
-    contexts: ['page']
-});
+    browser.contextMenus.create({
+        id: 'do-inject-jyutping',
+        title: browser.i18n.getMessage('contextMenuItemDoInjectJyutping'),
+        contexts: ['page'],
+    });
+})();

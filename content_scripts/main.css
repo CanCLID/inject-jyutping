@@ -4,4 +4,5 @@ ruby.inject-jyutping > rt {
     margin-left: 0.1em;
     margin-right: 0.1em;
     text-transform: initial;
+    letter-spacing: initial;
 }

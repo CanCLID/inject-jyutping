@@ -17,9 +17,7 @@ function hasHanChar(s) {
  * true. Otherwise returns false.
  */
 function isTargetLang(lang) {
-    return !lang.startsWith('ja')
-        && !lang.startsWith('ko')
-        && !lang.startsWith('vi');
+    return !lang.startsWith('ja') && !lang.startsWith('ko') && !lang.startsWith('vi');
 }
 
 /**
@@ -71,7 +69,7 @@ async function recursiveConvert(currentNode, langMatched) {
             }
 
             const newNodes = document.createDocumentFragment();
-            const conversionResults = await mm.sendMessage('convert', node.nodeValue);  // From background script
+            const conversionResults = await mm.sendMessage('convert', node.nodeValue); // From background script
             for (const [k, v] of conversionResults) {
                 newNodes.appendChild(v === null ? document.createTextNode(k) : makeRuby(k, v));
             }
