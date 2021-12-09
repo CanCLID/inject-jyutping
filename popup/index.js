@@ -7,6 +7,6 @@
 
 /* Handle state change */
 document.getElementById('extensionEnabled').addEventListener('click', () => {
-    browser.storage.local.set({enabled: document.getElementById('extensionEnabled').checked});
+    browser.storage.local.set({ enabled: document.getElementById('extensionEnabled').checked });
     document.getElementById('refreshPromptText').innerHTML = browser.i18n.getMessage('refreshPromptText');
 });
