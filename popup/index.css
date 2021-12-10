@@ -10,13 +10,20 @@ ruby.inject-jyutping > rt {
     text-transform: initial;
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #checkboxText {
     white-space: nowrap;
+    margin: 1rem;
 }
 
 #refreshPromptText {
     color: red;
-    font-size: smaller;
+    margin: 1rem;
 }
 
 /* Create a "toggle switch" (on/off button) with CSS.
@@ -46,7 +53,7 @@ ruby.inject-jyutping > rt {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #ebf7fc;
 }
 
 .slider:before {
@@ -57,14 +64,15 @@ ruby.inject-jyutping > rt {
     left: 4px;
     bottom: 4px;
     background-color: white;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
 input:checked + .slider {
-    background-color: #2196f3;
+    background-color: #03a9f4;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px #03a9f4;
 }
 
 input:checked + .slider:before {
