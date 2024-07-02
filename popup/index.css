@@ -11,9 +11,7 @@ ruby.inject-jyutping > rt {
 }
 
 #container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: ruby-text;
 }
 
 #checkboxText {
