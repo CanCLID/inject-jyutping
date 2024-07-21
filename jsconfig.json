@@ -4,7 +4,6 @@
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "moduleDetection": "force",
 
         "strict": true,
         "allowUnusedLabels": false,
@@ -16,12 +15,12 @@
         "isolatedModules": true,
         "verbatimModuleSyntax": true,
 
-		"checkJs": true,
+        "checkJs": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "useDefineForClassFields": true,
         "skipLibCheck": true,
         "incremental": true,
-		"noEmit": true
+        "noEmit": true
     }
 }

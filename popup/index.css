@@ -1,8 +1,17 @@
-.middle > * {
-    vertical-align: middle;
+body {
+    font-size: 16px;
+    margin: 1em;
 }
 
-ruby.inject-jyutping > rt {
+#auto-inject {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 0.5em;
+}
+
+rt {
     font-size: 0.74em;
     font-variant: initial;
     margin-left: 0.1em;
@@ -10,29 +19,22 @@ ruby.inject-jyutping > rt {
     text-transform: initial;
 }
 
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#checkboxText {
+#auto-inject-text {
     white-space: nowrap;
-    margin: 1rem;
 }
 
-.semibold {
+#auto-inject-cantonese-text {
     font-weight: 600;
 }
 
-#nativeCheckboxText {
-    font-size: 0.85em;
-    color: darkgrey;
+#auto-inject-native-text {
+    font-size: 0.75em;
+    color: dimgrey;
 }
 
-#refreshPromptText {
+#refresh-prompt-text {
+    font-size: 0.75em;
     color: red;
-    margin: 1rem;
 }
 
 /* Create a "toggle switch" (on/off button) with CSS.
@@ -40,7 +42,7 @@ ruby.inject-jyutping > rt {
  */
 
 /* The switch - the box around the slider */
-.switch {
+#auto-inject-switch {
     position: relative;
     display: inline-block;
     width: 49px;
@@ -48,53 +50,41 @@ ruby.inject-jyutping > rt {
 }
 
 /* Hide default HTML checkbox */
-.switch input {
+#auto-inject-checkbox {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
 /* The slider */
-.slider {
+#auto-inject-slider {
     position: absolute;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ebf7fc;
-}
-
-.slider:before {
-    position: absolute;
-    content: '';
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
-}
-
-input:checked + .slider {
-    background-color: #03a9f4;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #03a9f4;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(20px);
-    -ms-transform: translateX(20px);
-    transform: translateX(20px);
-}
-
-/* Rounded sliders */
-.slider.round {
+    inset: 0;
+    background-color: #8ac8f5;
     border-radius: 28px;
 }
 
-.slider.round:before {
+#auto-inject-slider:before {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
     border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#auto-inject-checkbox:checked + #auto-inject-slider {
+    background-color: #1592ec;
+}
+
+#auto-inject-checkbox:focus + #auto-inject-slider {
+    box-shadow: 0 0 1px #1592ec;
+}
+
+#auto-inject-checkbox:checked + #auto-inject-slider:before {
+    transform: translateX(20px);
 }

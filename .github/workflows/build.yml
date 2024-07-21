@@ -1,7 +1,12 @@
-name: Build
+name: Lint & Build
 
 on:
     push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
     release:
         types:
             - created
@@ -19,7 +24,11 @@ jobs:
             - name: Install dependencies
               run: npm i
 
+            - name: Run lint
+              run: npm run lint
+
             - name: Upload artifact
+              if: ${{ github.event_name == 'release' }}
               uses: actions/upload-artifact@v4
               with:
                   name: inject-jyutping
@@ -31,3 +40,5 @@ jobs:
                       lib
                       popup
                       manifest.json
+                      node_modules/webextension-polyfill/dist/browser-polyfill.min.js
+                      node_modules/to-jyutping/dist/index.js

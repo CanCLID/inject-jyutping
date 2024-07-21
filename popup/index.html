@@ -3,27 +3,26 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="index.css" />
-        <script src="../lib/browser-polyfill.js" defer></script>
-        <script src="index.js" defer></script>
+        <script type="module" src="index.js" defer></script>
     </head>
     <body>
         <div id="container">
-            <div class="middle">
-                <div id="checkboxText">
-                    <div lang="yue" class="semibold">
+            <div id="auto-inject">
+                <div id="auto-inject-text">
+                    <div lang="yue" id="auto-inject-cantonese-text">
                         <ruby>自<rp>(</rp><rt lang="yue-Latn">zi6</rt><rp>)</rp></ruby
                         ><ruby>動<rp>(</rp><rt lang="yue-Latn">dung6</rt><rp>)</rp></ruby
                         ><ruby>注<rp>(</rp><rt lang="yue-Latn">zyu3</rt><rp>)</rp></ruby
                         ><ruby>入<rp>(</rp><rt lang="yue-Latn">jap6</rt><rp>)</rp></ruby>
                     </div>
-                    <div id="nativeCheckboxText"></div>
+                    <div id="auto-inject-native-text"></div>
                 </div>
-                <label class="switch">
-                    <input id="extensionEnabled" type="checkbox" />
-                    <span class="slider round"></span>
+                <label id="auto-inject-switch">
+                    <input id="auto-inject-checkbox" type="checkbox" />
+                    <span id="auto-inject-slider"></span>
                 </label>
             </div>
-            <p id="refreshPromptText"></p>
+            <div id="refresh-prompt-text"></div>
         </div>
     </body>
 </html>

@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "__MSG_extensionName__",
     "version": "0.4.0",
     "description": "__MSG_extensionDescription__",
@@ -11,19 +11,29 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["lib/browser-polyfill.js", "lib/MessageManager.js", "content_scripts/main.js"],
-            "css": ["content_scripts/main.css"],
+            "js": ["node_modules/webextension-polyfill/dist/browser-polyfill.min.js", "lib/MessageManager.js", "content_scripts/index.js"],
+            "css": ["content_scripts/index.css"],
             "all_frames": true,
             "run_at": "document_end"
         }
     ],
     "background": {
-        "scripts": ["lib/browser-polyfill.js", "lib/MessageManager.js", "background_scripts/main.js"],
-        "persistent": true
+        "service_worker": "background_scripts/index.js",
+        "type": "module"
     },
+    "web_accessible_resources": [
+        {
+            "matches": ["<all_urls>"],
+            "resources": [
+                "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+                "node_modules/to-jyutping/dist/index.js",
+                "lib/MessageManager.js"
+            ]
+        }
+    ],
     "permissions": ["contextMenus", "storage"],
     "default_locale": "en",
-    "browser_action": {
+    "action": {
         "default_icon": "icons/96.png",
         "default_title": "__MSG_extensionName__",
         "default_popup": "popup/index.html"

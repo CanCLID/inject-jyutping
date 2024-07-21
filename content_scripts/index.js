@@ -1,13 +1,10 @@
-import Browser from 'webextension-polyfill';
-import MessageManager from '../lib/MessageManager.js';
-
 /**
  * Check if a string contains Chinese characters.
  * @param {string} s The string to be checked
  * @return {boolean} Whether the string contains at least one Chinese character.
  */
 function hasHanChar(s) {
-    return /[〆〇一-鿿㐀-䶿𠀀-𪛟𪜀-𫜿𫝀-𫠟𫠠-𬺯𬺰-𮯯𰀀-𱍏]/u.test(s);
+    return /[\p{Unified_Ideograph}\u3006\u3007]/u.test(s);
 }
 
 /**
@@ -48,7 +45,7 @@ function makeRuby(ch, pronunciation) {
     return ruby;
 }
 
-const port = Browser.runtime.connect();
+const port = browser.runtime.connect();
 /** @type { MessageManager<{ convert(msg: string): [string, string | null][] }> } */
 const mm = new MessageManager(port);
 const mo = new MutationObserver(changes => {
@@ -120,14 +117,14 @@ const init = once(() => {
     });
 });
 
-Browser.runtime.onMessage.addListener(msg => {
+browser.runtime.onMessage.addListener(msg => {
     if (msg.name === 'do-inject-jyutping') {
         init();
     }
 });
 
 async function autoInit() {
-    if ((await Browser.storage.local.get('enabled'))['enabled'] !== false) {
+    if ((await browser.storage.local.get('enabled'))['enabled'] !== false) {
         init();
     }
 }
