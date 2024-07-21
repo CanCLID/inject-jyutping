@@ -1,4 +1,4 @@
-.middle {
+.middle > * {
     vertical-align: middle;
 }
 
@@ -19,6 +19,15 @@ ruby.inject-jyutping > rt {
 #checkboxText {
     white-space: nowrap;
     margin: 1rem;
+}
+
+.semibold {
+    font-weight: 600;
+}
+
+#nativeCheckboxText {
+    font-size: 0.85em;
+    color: darkgrey;
 }
 
 #refreshPromptText {

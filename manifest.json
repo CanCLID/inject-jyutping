@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "__MSG_extensionName__",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "__MSG_extensionDescription__",
     "icons": {
         "48": "icons/48.png",
@@ -18,7 +18,7 @@
         }
     ],
     "background": {
-        "scripts": ["lib/browser-polyfill.js", "lib/MessageManager.js", "lib/Trie.js", "background_scripts/main.js"],
+        "scripts": ["lib/browser-polyfill.js", "lib/MessageManager.js", "background_scripts/main.js"],
         "persistent": true
     },
     "permissions": ["contextMenus", "storage"],

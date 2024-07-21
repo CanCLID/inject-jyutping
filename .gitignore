@@ -1,6 +1,4 @@
-/jyut6ping3.dict.yaml
-/jyut6ping3.simple.dict.yaml
-/background_scripts/dictionary.json.txt
-/preprocess.py
-/lib/browser-polyfill.js
-/inject-jyutping.zip
+inject-jyutping.zip
+node_modules
+DS_Store
+dist

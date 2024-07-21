@@ -1,0 +1,20 @@
+{
+    "langCode": {
+        "message": "ko"
+    },
+    "extensionName": {
+        "message": "월병(粵拼)을 주입"
+    },
+    "extensionDescription": {
+        "message": "한자에 광동어의 발음(월병/粵拼)을 붙인다."
+    },
+    "contextMenuItemDoInjectJyutping": {
+        "message": "월병(粵拼)을 주입"
+    },
+    "popupCheckboxText": {
+        "message": "자동으로 주입"
+    },
+    "refreshPromptText": {
+        "message": "변경사항을 적용하려면 페이지를 다시 로드하세요."
+    }
+}

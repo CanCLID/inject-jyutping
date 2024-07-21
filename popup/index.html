@@ -8,11 +8,21 @@
     </head>
     <body>
         <div id="container">
-            <b id="checkboxText" class="middle"></b>&nbsp;
-            <label class="middle switch">
-                <input id="extensionEnabled" type="checkbox" />
-                <span class="slider round"></span>
-            </label>
+            <div class="middle">
+                <div id="checkboxText">
+                    <div lang="yue" class="semibold">
+                        <ruby>自<rp>(</rp><rt lang="yue-Latn">zi6</rt><rp>)</rp></ruby
+                        ><ruby>動<rp>(</rp><rt lang="yue-Latn">dung6</rt><rp>)</rp></ruby
+                        ><ruby>注<rp>(</rp><rt lang="yue-Latn">zyu3</rt><rp>)</rp></ruby
+                        ><ruby>入<rp>(</rp><rt lang="yue-Latn">jap6</rt><rp>)</rp></ruby>
+                    </div>
+                    <div id="nativeCheckboxText"></div>
+                </div>
+                <label class="switch">
+                    <input id="extensionEnabled" type="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <p id="refreshPromptText"></p>
         </div>
     </body>

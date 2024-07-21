@@ -1,0 +1,17 @@
+{
+    "name": "inject-jyutping",
+    "version": "0.4.0",
+    "description": "A browser extension that adds Cantonese pronunciation (Jyutping) on Chinese characters",
+    "type": "module",
+    "scripts": {
+        "lint": "tsc"
+    },
+    "dependencies": {
+        "to-jyutping": "2.0.0",
+        "webextension-polyfill": "^0.12.0"
+    },
+    "devDependencies": {
+        "@types/webextension-polyfill": "^0.10.7",
+        "typescript": "^5.5.3"
+    }
+}

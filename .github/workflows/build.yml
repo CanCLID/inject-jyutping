@@ -1,34 +1,33 @@
 name: Build
 
 on:
-  push:
-  release:
-    types:
-      - created
+    push:
+    release:
+        types:
+            - created
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install opencc
-    - name: Build
-      run: python build.py
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: inject-jyutping
-        path: |
-          _locales
-          background_scripts
-          content_scripts
-          icons
-          lib
-          popup
-          manifest.json
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+
+            - name: Install dependencies
+              run: npm i
+
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: inject-jyutping
+                  path: |
+                      _locales
+                      background_scripts
+                      content_scripts
+                      icons
+                      lib
+                      popup
+                      manifest.json
