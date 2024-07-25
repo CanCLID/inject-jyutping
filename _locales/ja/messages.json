@@ -3,16 +3,16 @@
         "message": "ja"
     },
     "extensionName": {
-        "message": "粵拼を注入"
+        "message": "粤拼を注入"
     },
     "extensionDescription": {
-        "message": "漢字に広東語の発音（粵拼）を付ける。"
+        "message": "漢字に広東語の発音（粤拼）を付けます。"
     },
     "contextMenuItemDoInjectJyutping": {
-        "message": "粵拼を注入"
+        "message": "粤拼を注入"
     },
     "popupCheckboxText": {
-        "message": "オート注入（<ruby class=\"inject-jyutping\">自<rp>(</rp><rt lang=\"yue-Latn\">zi6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">動<rp>(</rp><rt lang=\"yue-Latn\">dung6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">注<rp>(</rp><rt lang=\"yue-Latn\">zyu3</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">入<rp>(</rp><rt lang=\"yue-Latn\">jap6</rt><rp>)</rp></ruby>）"
+        "message": "自動で注入"
     },
     "refreshPromptText": {
         "message": "変更を有効にするには、ページを再読み込みしてください。"

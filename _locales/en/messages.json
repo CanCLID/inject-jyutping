@@ -12,7 +12,7 @@
         "message": "Inject Jyutping"
     },
     "popupCheckboxText": {
-        "message": "Inject automatically（<ruby class=\"inject-jyutping\">自<rp>(</rp><rt lang=\"yue-Latn\">zi6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">動<rp>(</rp><rt lang=\"yue-Latn\">dung6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">注<rp>(</rp><rt lang=\"yue-Latn\">zyu3</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">入<rp>(</rp><rt lang=\"yue-Latn\">jap6</rt><rp>)</rp></ruby>）"
+        "message": "Inject automatically"
     },
     "refreshPromptText": {
         "message": "Please refresh the page for the change to take effect."

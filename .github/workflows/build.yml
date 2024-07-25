@@ -1,34 +1,44 @@
-name: Build
+name: Lint & Build
 
 on:
-  push:
-  release:
-    types:
-      - created
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    release:
+        types:
+            - created
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install opencc
-    - name: Build
-      run: python build.py
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: inject-jyutping
-        path: |
-          _locales
-          background_scripts
-          content_scripts
-          icons
-          lib
-          popup
-          manifest.json
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+
+            - name: Install dependencies
+              run: npm i
+
+            - name: Run lint
+              run: npm run lint
+
+            - name: Upload artifact
+              if: ${{ github.event_name == 'release' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: inject-jyutping
+                  path: |
+                      _locales
+                      background_scripts
+                      content_scripts
+                      icons
+                      lib
+                      popup
+                      manifest.json
+                      node_modules/webextension-polyfill/dist/browser-polyfill.min.js
+                      node_modules/to-jyutping/dist/index.js

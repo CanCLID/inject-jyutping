@@ -12,9 +12,9 @@
         "message": "注入粵拼"
     },
     "popupCheckboxText": {
-        "message": "<ruby class=\"inject-jyutping\">自<rp>(</rp><rt lang=\"yue-Latn\">zi6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">動<rp>(</rp><rt lang=\"yue-Latn\">dung6</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">注<rp>(</rp><rt lang=\"yue-Latn\">zyu3</rt><rp>)</rp></ruby><ruby class=\"inject-jyutping\">入<rp>(</rp><rt lang=\"yue-Latn\">jap6</rt><rp>)</rp></ruby>"
+        "message": ""
     },
     "refreshPromptText": {
-        "message": "請刷新頁面使更改生效。"
+        "message": "請重新載入頁面以使變更生效。"
     }
 }
