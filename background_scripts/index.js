@@ -1,5 +1,5 @@
-import '/node_modules/webextension-polyfill/dist/browser-polyfill.min.js';
-import '/node_modules/to-jyutping/dist/index.js';
+import '/lib/webextension-polyfill.js';
+import '/lib/to-jyutping.js';
 import '/lib/MessageManager.js';
 
 /* Communicate with content script */

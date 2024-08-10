@@ -40,5 +40,3 @@ jobs:
                       lib
                       popup
                       manifest.json
-                      node_modules/webextension-polyfill/dist/browser-polyfill.min.js
-                      node_modules/to-jyutping/dist/index.js

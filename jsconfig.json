@@ -22,5 +22,6 @@
         "skipLibCheck": true,
         "incremental": true,
         "noEmit": true
-    }
+    },
+    "exclude": ["node_modules", "./lib/webextension-polyfill.js", "./lib/to-jyutping.js"]
 }

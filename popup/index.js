@@ -1,4 +1,4 @@
-import '/node_modules/webextension-polyfill/dist/browser-polyfill.min.js';
+import './lib/webextension-polyfill.js';
 
 const i = browser.i18n.getMessage;
 
