@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "__MSG_extensionName__",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "__MSG_extensionDescription__",
     "icons": {
         "48": "icons/48.png",
@@ -11,27 +11,20 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["lib/webextension-polyfill.js", "lib/MessageManager.js", "content_scripts/index.js"],
-            "css": ["content_scripts/index.css"],
+            "js": ["src/content_scripts/index.ts"],
             "all_frames": true,
             "run_at": "document_end"
         }
     ],
     "background": {
-        "service_worker": "background_scripts/index.js",
+        "service_worker": "src/background_scripts/index.ts",
         "type": "module"
     },
-    "web_accessible_resources": [
-        {
-            "matches": ["<all_urls>"],
-            "resources": ["lib/webextension-polyfill.js", "lib/to-jyutping.js", "lib/MessageManager.js"]
-        }
-    ],
     "permissions": ["contextMenus", "storage"],
     "default_locale": "en",
     "action": {
         "default_icon": "icons/96.png",
         "default_title": "__MSG_extensionName__",
-        "default_popup": "popup/index.html"
+        "default_popup": "src/popup/index.html"
     }
 }

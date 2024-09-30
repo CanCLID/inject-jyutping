@@ -2,8 +2,9 @@
     "compilerOptions": {
         "target": "ES2017",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "moduleDetection": "force",
 
         "strict": true,
         "allowUnusedLabels": false,
@@ -15,7 +16,6 @@
         "isolatedModules": true,
         "verbatimModuleSyntax": true,
 
-        "checkJs": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "useDefineForClassFields": true,
@@ -23,5 +23,5 @@
         "incremental": true,
         "noEmit": true
     },
-    "exclude": ["node_modules", "./lib/webextension-polyfill.js", "./lib/to-jyutping.js"]
+    "include": ["src"]
 }

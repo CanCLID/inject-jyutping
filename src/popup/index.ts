@@ -1,10 +1,12 @@
-import './lib/webextension-polyfill.js';
+import browser from 'webextension-polyfill';
+
+import './index.css';
 
 const i = browser.i18n.getMessage;
 
-const autoInjectNativeText = /** @type {HTMLDivElement} */ (document.getElementById('auto-inject-native-text'));
-const autoInjectCheckbox = /** @type {HTMLInputElement} */ (document.getElementById('auto-inject-checkbox'));
-const refreshPromptText = /** @type {HTMLParagraphElement} */ (document.getElementById('refresh-prompt-text'));
+const autoInjectNativeText = document.getElementById('auto-inject-native-text') as HTMLDivElement;
+const autoInjectCheckbox = document.getElementById('auto-inject-checkbox') as HTMLInputElement;
+const refreshPromptText = document.getElementById('refresh-prompt-text') as HTMLParagraphElement;
 
 /* Initialize state */
 (async () => {

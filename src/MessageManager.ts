@@ -1,13 +1,21 @@
-/** @import { Runtime } from 'webextension-polyfill'; */
+import type { Runtime } from 'webextension-polyfill';
 
 const getUniqueId = (
     id => () =>
         id++
 )(0);
 
+interface Message {
+    id: number;
+    msg: any;
+}
+
+function isMessage(obj: any): obj is Message {
+    return obj && typeof obj === 'object' && typeof obj.id === 'number' && 'msg' in obj;
+}
+
 /**
  * A class to manage messages between background script and content script.
- * @template {Record<string, (msg: any) => any>} T
  * @example
  * In background script:
  *
@@ -28,30 +36,15 @@ const getUniqueId = (
  * mm.sendMessage('triple', '你好').then(alert); // Will alert 你好你好你好
  * ```
  */
-class MessageManager {
-    /**
-     * @param {Runtime.Port} port
-     */
-    constructor(port) {
-        /**
-         * @type {Runtime.Port}
-         * @private
-         */
-        this.port = port;
-    }
+export default class MessageManager<T extends Record<string, (msg: any) => any>> {
+    constructor(private port: Runtime.Port) {}
 
-    /**
-     * @template {keyof T} K
-     * @param {K} handlerName
-     * @param {Parameters<T[K]>[0]} msg
-     * @returns {Promise<ReturnType<T[K]>>}
-     */
-    sendMessage(handlerName, msg) {
+    sendMessage<K extends keyof T>(handlerName: K, msg: Parameters<T[K]>[0]): Promise<ReturnType<T[K]>> {
         const { port } = this;
         const id = getUniqueId();
         return new Promise(resolve => {
             port.onMessage.addListener(function f(response) {
-                if (response.id === id) {
+                if (isMessage(response) && response.id === id) {
                     port.onMessage.removeListener(f);
                     resolve(response.msg);
                 }
@@ -60,22 +53,13 @@ class MessageManager {
         });
     }
 
-    /**
-     * @template {keyof T} K
-     * @param {K} handlerName
-     * @param {T[K]} f
-     */
-    registerHandler(handlerName, f) {
+    registerHandler<K extends keyof T>(handlerName: K, f: T[K]) {
         const { port } = this;
         port.onMessage.addListener(msg => {
-            if (msg.name === handlerName) {
+            if (isMessage(msg) && 'name' in msg && msg.name === handlerName) {
                 const res = f(msg.msg);
                 port.postMessage({ msg: res, id: msg.id });
             }
         });
     }
 }
-
-Object.assign(globalThis, { MessageManager });
-
-/** @type {typeof MessageManager} MessageManager */

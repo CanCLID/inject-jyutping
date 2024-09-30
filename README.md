@@ -12,3 +12,26 @@ A browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge that 
 <h2>Preview <ruby>預<rt>jyu6</rt></ruby> <ruby>覽<rt>laam5</rt></ruby></h2>
 
 ![Demo](./demo.jpg)
+
+<h2>Development <ruby>開<rt>hoi1</rt></ruby> <ruby>發<rt>faat3</rt></ruby></h2>
+
+執行以下命令：
+
+Run the following command:
+
+```sh
+npm i
+npm start
+```
+
+再去瀏覽器「擴充功能」頁撳「載入未封裝項目」並揀選 `dist` 資料夾。
+
+And navigate to the browser “Extensions” page, click “Load Unpacked” and select the `dist` folder.
+
+要產生用於發佈嘅版本，請執行：
+
+To generate a production build, run:
+
+```sh
+npm run build
+```

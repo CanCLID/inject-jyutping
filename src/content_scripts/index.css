@@ -6,3 +6,7 @@ ruby.inject-jyutping > rt {
     text-transform: initial;
     letter-spacing: initial;
 }
+
+ruby.inject-jyutping > rt::after {
+    content: attr(data-content);
+}
