@@ -1,6 +1,6 @@
 {
     "name": "inject-jyutping",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "A browser extension that adds Cantonese pronunciation (Jyutping) on Chinese characters",
     "type": "module",
     "scripts": {
@@ -9,7 +9,7 @@
         "start": "parcel watch manifest.json --config @parcel/config-webextension --host localhost",
         "prebuild": "npm run lint && npm run clear",
         "build": "parcel build manifest.json --config @parcel/config-webextension --no-source-maps --no-cache",
-        "postbuild": "node scripts/replace-surrogates.js",
+        "postbuild": "node scripts/replace-surrogates.js && node scripts/patch-manifest.js",
         "lint": "tsc -p tsconfig.json"
     },
     "dependencies": {

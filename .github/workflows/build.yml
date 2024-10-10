@@ -34,5 +34,6 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  zip -r inject-jyutping.zip dist
+                  cd dist
+                  zip -r inject-jyutping.zip *
                   gh release upload ${{ github.ref_name }} inject-jyutping.zip --clobber
