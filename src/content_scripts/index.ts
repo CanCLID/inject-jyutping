@@ -73,11 +73,29 @@ function forEachText(node: Node, callback: (node: Node) => void, lang = '') {
     }
 }
 
+const toneReplacements: Record<string, string> = {
+  '1': 'ˉ¹',
+  '2': '´²',
+  '3': '-³',
+  '4': 'ˎ₄',
+  '5': 'ˏ₅',
+  '6': 'ˍ₆'
+};
+
+const regex = /[1-6]/g;
+
 async function convertText(node: Node) {
     const conversionResults = await mm.sendMessage('convert', node.nodeValue || '');
     const newNodes = document.createDocumentFragment();
     for (const [k, v] of conversionResults) {
-        newNodes.appendChild(v === null ? document.createTextNode(k) : makeRuby(k, v));
+        if (v === null) {
+            newNodes.appendChild(document.createTextNode(k));
+        } else {
+            const processedV = contourEnabled
+                ? v.replace(regex, digit => toneReplacements[digit])
+                : v;
+            newNodes.appendChild(makeRuby(k, processedV));
+        }
     }
     if (node.isConnected) {
         node.parentNode?.replaceChild(newNodes, node);
@@ -110,8 +128,12 @@ browser.runtime.onMessage.addListener(msg => {
     return undefined;
 });
 
+let contourEnabled: boolean = false;
+
 async function autoInit() {
-    if ((await browser.storage.local.get('enabled'))['enabled'] !== false) {
+    const storage = await browser.storage.local.get(['enabled', 'contourEnabled']);
+    contourEnabled = storage['contourEnabled'] === true;
+    if (storage['enabled'] !== false) {
         init();
     }
 }

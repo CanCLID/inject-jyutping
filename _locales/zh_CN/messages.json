@@ -14,6 +14,9 @@
     "popupCheckboxText": {
         "message": "自动注入"
     },
+    "popupContourCheckboxText": {
+        "message": "调形显示"
+    },
     "refreshPromptText": {
         "message": "请刷新页面使更改生效。"
     }

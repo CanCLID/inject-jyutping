@@ -9,4 +9,5 @@ ruby.inject-jyutping > rt {
 
 ruby.inject-jyutping > rt::after {
     content: attr(data-content);
+    font-family: Segoe UI;
 }

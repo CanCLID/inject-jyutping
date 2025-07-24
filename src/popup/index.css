@@ -1,9 +1,26 @@
+:root {
+    --text-color: #000;
+    --bg-color: #fff;
+    --slider-color: #8ac8f5; 
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #dbdbdb;
+        --bg-color: #191919;
+        --slider-color: #3c4043;
+    }
+}
+
 body {
     font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 1em;
 }
 
-#auto-inject {
+#auto-inject,
+#contour-display {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +28,28 @@ body {
     margin-bottom: 0.5em;
 }
 
+#auto-inject-text,
+#contour-display-text {
+    white-space: nowrap;
+}
+
+/* Container for text alignment */
+#auto-inject-cantonese-text,
+#contour-display-cantonese-text {
+    display: flex;
+    font-weight: 600;
+}
+
+/* Text alignment */
+ruby {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    min-width: 2.35em;
+}
+
 rt {
+    font-family: Segoe UI;
     font-size: 0.74em;
     font-variant: initial;
     margin-left: 0.1em;
@@ -19,17 +57,11 @@ rt {
     text-transform: initial;
 }
 
-#auto-inject-text {
-    white-space: nowrap;
-}
-
-#auto-inject-cantonese-text {
-    font-weight: 600;
-}
-
-#auto-inject-native-text {
+#auto-inject-native-text,
+#contour-display-native-text {
     font-size: 0.75em;
     color: dimgrey;
+    text-indent: 1em;
 }
 
 #refresh-prompt-text {
@@ -42,30 +74,35 @@ rt {
  */
 
 /* The switch - the box around the slider */
-#auto-inject-switch {
+#auto-inject-switch,
+#contour-display-switch {
     position: relative;
     display: inline-block;
     width: 49px;
     height: 28px;
+    margin-right: 0.5em;
 }
 
 /* Hide default HTML checkbox */
-#auto-inject-checkbox {
+#auto-inject-checkbox,
+#contour-display-checkbox {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
 /* The slider */
-#auto-inject-slider {
+#auto-inject-slider,
+#contour-display-slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: #8ac8f5;
+    background-color: var(--slider-color);
     border-radius: 28px;
 }
 
-#auto-inject-slider:before {
+#auto-inject-slider:before,
+#contour-display-slider:before {
     position: absolute;
     content: '';
     width: 20px;
@@ -77,14 +114,17 @@ rt {
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#auto-inject-checkbox:checked + #auto-inject-slider {
+#auto-inject-checkbox:checked + #auto-inject-slider,
+#contour-display-checkbox:checked + #contour-display-slider {
     background-color: #1592ec;
 }
 
-#auto-inject-checkbox:focus + #auto-inject-slider {
+#auto-inject-checkbox:focus + #auto-inject-slider,
+#contour-display-checkbox:focus + #contour-display-slider {
     box-shadow: 0 0 1px #1592ec;
 }
 
-#auto-inject-checkbox:checked + #auto-inject-slider:before {
+#auto-inject-checkbox:checked + #auto-inject-slider:before,
+#contour-display-checkbox:checked + #contour-display-slider:before {
     transform: translateX(20px);
 }

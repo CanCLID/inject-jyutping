@@ -14,6 +14,9 @@
     "popupCheckboxText": {
         "message": "Inject automatically"
     },
+    "popupContourCheckboxText": {
+        "message": "Display tone contours"
+    },
     "refreshPromptText": {
         "message": "Please refresh the page for the change to take effect."
     }

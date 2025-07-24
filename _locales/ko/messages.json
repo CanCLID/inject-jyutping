@@ -14,6 +14,9 @@
     "popupCheckboxText": {
         "message": "자동으로 주입"
     },
+    "popupContourCheckboxText": {
+        "message": "조형을 표시"
+    },
     "refreshPromptText": {
         "message": "변경사항을 적용하려면 페이지를 다시 로드하세요."
     }
